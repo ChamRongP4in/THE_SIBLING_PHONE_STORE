@@ -1,224 +1,628 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>បងប្អូន Store</title>
-<meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap">
-<style>
-/* Layout: white frosted-glass cards over a pastel sky with drifting color orbs and rising glass bubbles. Single light look by choice. */
-:root {
-  --bg: #f1f6fb;
-  --ink: #12202b;
-  --muted: #55697a;
-  --glass: rgba(255,255,255,.42);
-  --glass-strong: rgba(255,255,255,.78);
-  --glass-line: rgba(255,255,255,.95);
-  --spot: rgba(120,190,255,.32);
-  --orb1: #8fe8d8;
-  --orb2: #ffb3cf;
-  --orb3: #ffe3a0;
-  --orb4: #aec6ff;
-  --accent: #0b7f6e;
-  --ring-a: #18c3a8;
-  --ring-b: #ff6aa2;
-  --ring-c: #ffb02e;
-  --shadow: rgba(52,86,120,.22);
-  --font: "Kantumruy Pro", "Noto Sans Khmer", "Khmer OS", system-ui, sans-serif;
-  color-scheme: light;
-}
-* { box-sizing: border-box; }
-body {
-  margin: 0; background: var(--bg); color: var(--ink);
-  font-family: var(--font); font-size: 16px; line-height: 1.5;
-  min-height: 100vh;
-  padding-left: max(16px, env(safe-area-inset-left, 0px));
-  padding-right: max(16px, env(safe-area-inset-right, 0px));
-  padding-block: 56px 40px;
-}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,viewport-fit=cover"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+        box-sizing: border-box;
+        padding-top: env(safe-area-inset-top, 0px);
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+      }
+      html {
+        scroll-padding-top: env(safe-area-inset-top, 0px);
+      }
+      body {
+        margin: 0;
+        padding: 0;
+        font:
+          14px -apple-system,
+          BlinkMacSystemFont,
+          sans-serif;
+        background: #fff;
+        color: #000;
+      }
+      img {
+        max-width: 100%;
+      }
+      [hidden]:not([hidden='until-found' i]) {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <title>បងប្អូន Store</title>
+    <meta name="claude:viewport-fit-sides" content="cover" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Kantumruy+Pro:wght@400;500;600;700&display=swap"
+    />
+    <style>
+      /* Layout: white frosted-glass cards over a pastel sky with drifting color orbs and rising glass bubbles. Single light look by choice. */
+      :root {
+        --bg: #f1f6fb;
+        --ink: #12202b;
+        --muted: #55697a;
+        --glass: rgba(255, 255, 255, 0.42);
+        --glass-strong: rgba(255, 255, 255, 0.78);
+        --glass-line: rgba(255, 255, 255, 0.95);
+        --spot: rgba(120, 190, 255, 0.32);
+        --orb1: #8fe8d8;
+        --orb2: #ffb3cf;
+        --orb3: #ffe3a0;
+        --orb4: #aec6ff;
+        --accent: #0b7f6e;
+        --ring-a: #18c3a8;
+        --ring-b: #ff6aa2;
+        --ring-c: #ffb02e;
+        --shadow: rgba(52, 86, 120, 0.22);
+        --font:
+          'Kantumruy Pro', 'Noto Sans Khmer', 'Khmer OS', system-ui, sans-serif;
+        color-scheme: light;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--ink);
+        font-family: var(--font);
+        font-size: 16px;
+        line-height: 1.5;
+        min-height: 100vh;
+        padding-left: max(16px, env(safe-area-inset-left, 0px));
+        padding-right: max(16px, env(safe-area-inset-right, 0px));
+        padding-block: 56px 40px;
+      }
 
-/* animated background */
-.bg { position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
-.bg .orb { position: absolute; border-radius: 50%; filter: blur(70px); opacity: .85; will-change: transform; }
-.o1 { width: 380px; height: 380px; background: var(--orb1); top: -110px; left: -120px; animation: drift1 16s ease-in-out infinite alternate; }
-.o2 { width: 340px; height: 340px; background: var(--orb2); top: 30%; right: -130px; animation: drift2 20s ease-in-out infinite alternate; }
-.o3 { width: 360px; height: 360px; background: var(--orb3); bottom: -130px; left: 4%; animation: drift3 24s ease-in-out infinite alternate; }
-.o4 { width: 280px; height: 280px; background: var(--orb4); top: 55%; left: -100px; animation: drift2 28s ease-in-out infinite alternate-reverse; }
-@keyframes drift1 { to { transform: translate(110px, 160px) scale(1.18); } }
-@keyframes drift2 { to { transform: translate(-130px, -110px) scale(.88); } }
-@keyframes drift3 { to { transform: translate(140px, -100px) scale(1.22); } }
+      /* animated background */
+      .bg {
+        position: fixed;
+        inset: 0;
+        overflow: hidden;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .bg .orb {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(70px);
+        opacity: 0.85;
+        will-change: transform;
+      }
+      .o1 {
+        width: 380px;
+        height: 380px;
+        background: var(--orb1);
+        top: -110px;
+        left: -120px;
+        animation: drift1 16s ease-in-out infinite alternate;
+      }
+      .o2 {
+        width: 340px;
+        height: 340px;
+        background: var(--orb2);
+        top: 30%;
+        right: -130px;
+        animation: drift2 20s ease-in-out infinite alternate;
+      }
+      .o3 {
+        width: 360px;
+        height: 360px;
+        background: var(--orb3);
+        bottom: -130px;
+        left: 4%;
+        animation: drift3 24s ease-in-out infinite alternate;
+      }
+      .o4 {
+        width: 280px;
+        height: 280px;
+        background: var(--orb4);
+        top: 55%;
+        left: -100px;
+        animation: drift2 28s ease-in-out infinite alternate-reverse;
+      }
+      @keyframes drift1 {
+        to {
+          transform: translate(110px, 160px) scale(1.18);
+        }
+      }
+      @keyframes drift2 {
+        to {
+          transform: translate(-130px, -110px) scale(0.88);
+        }
+      }
+      @keyframes drift3 {
+        to {
+          transform: translate(140px, -100px) scale(1.22);
+        }
+      }
 
-.bubble {
-  position: absolute; left: var(--x); bottom: -160px;
-  width: var(--s); height: var(--s); border-radius: 50%;
-  background: radial-gradient(circle at 30% 28%, rgba(255,255,255,.95), rgba(255,255,255,.35) 45%, rgba(255,255,255,.08) 72%);
-  border: 1px solid rgba(255,255,255,.9);
-  box-shadow: inset -6px -8px 16px rgba(120,170,230,.18), 0 8px 24px rgba(80,120,170,.12);
-  animation: rise var(--t) linear infinite;
-  animation-delay: var(--d);
-  will-change: transform;
-}
-@keyframes rise {
-  0%   { transform: translate3d(0, 0, 0); }
-  50%  { transform: translate3d(28px, -60vh, 0); }
-  100% { transform: translate3d(-18px, -125vh, 0); }
-}
+      .bubble {
+        position: absolute;
+        left: var(--x);
+        bottom: -160px;
+        width: var(--s);
+        height: var(--s);
+        border-radius: 50%;
+        background: radial-gradient(
+          circle at 30% 28%,
+          rgba(255, 255, 255, 0.95),
+          rgba(255, 255, 255, 0.35) 45%,
+          rgba(255, 255, 255, 0.08) 72%
+        );
+        border: 1px solid rgba(255, 255, 255, 0.9);
+        box-shadow:
+          inset -6px -8px 16px rgba(120, 170, 230, 0.18),
+          0 8px 24px rgba(80, 120, 170, 0.12);
+        animation: rise var(--t) linear infinite;
+        animation-delay: var(--d);
+        will-change: transform;
+      }
+      @keyframes rise {
+        0% {
+          transform: translate3d(0, 0, 0);
+        }
+        50% {
+          transform: translate3d(28px, -60vh, 0);
+        }
+        100% {
+          transform: translate3d(-18px, -125vh, 0);
+        }
+      }
 
-main { position: relative; z-index: 1; max-width: 440px; margin: 0 auto; display: flex; flex-direction: column; gap: 30px; }
-header { display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center; }
+      main {
+        position: relative;
+        z-index: 1;
+        max-width: 440px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+      }
+      header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        text-align: center;
+      }
 
-/* glass surface */
-.glass {
-  background: linear-gradient(145deg, var(--glass-strong), var(--glass) 60%);
-  -webkit-backdrop-filter: blur(22px) saturate(160%);
-  backdrop-filter: blur(22px) saturate(160%);
-  border: 1px solid var(--glass-line);
-  box-shadow: inset 0 1px 0 #fff, inset 0 -1px 0 rgba(255,255,255,.4), 0 18px 40px -18px var(--shadow);
-}
+      /* glass surface */
+      .glass {
+        background: linear-gradient(
+          145deg,
+          var(--glass-strong),
+          var(--glass) 60%
+        );
+        -webkit-backdrop-filter: blur(22px) saturate(160%);
+        backdrop-filter: blur(22px) saturate(160%);
+        border: 1px solid var(--glass-line);
+        box-shadow:
+          inset 0 1px 0 #fff,
+          inset 0 -1px 0 rgba(255, 255, 255, 0.4),
+          0 18px 40px -18px var(--shadow);
+      }
 
-/* logo with spinning ring. To use a real logo, put an <img> inside .logo */
-.logo-wrap { position: relative; width: 140px; height: 140px; animation: float 6s ease-in-out infinite; }
-.ring, .ring-glow {
-  position: absolute; inset: 0; border-radius: 50%;
-  background: conic-gradient(from 0deg, var(--ring-a), var(--ring-b), var(--ring-c), var(--ring-a));
-  animation: spin 7s linear infinite;
-}
-.ring { -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px)); mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 3px)); }
-.ring-glow { filter: blur(16px); opacity: .5; }
-.logo {
-  position: absolute; inset: 8px; border-radius: 50%; overflow: hidden;
-  display: grid; place-items: center;
-  font-size: 50px; font-weight: 700; line-height: 1; color: var(--ink);
-}
-.logo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-@keyframes spin { to { transform: rotate(360deg); } }
-@keyframes float { 50% { transform: translateY(-6px); } }
+      /* logo with spinning ring. To use a real logo, put an <img> inside .logo */
+      .logo-wrap {
+        position: relative;
+        width: 140px;
+        height: 140px;
+        animation: float 6s ease-in-out infinite;
+      }
+      .ring,
+      .ring-glow {
+        position: absolute;
+        inset: 0;
+        border-radius: 50%;
+        background: conic-gradient(
+          from 0deg,
+          var(--ring-a),
+          var(--ring-b),
+          var(--ring-c),
+          var(--ring-a)
+        );
+        animation: spin 7s linear infinite;
+      }
+      .ring {
+        -webkit-mask: radial-gradient(
+          farthest-side,
+          transparent calc(100% - 3px),
+          #000 calc(100% - 3px)
+        );
+        mask: radial-gradient(
+          farthest-side,
+          transparent calc(100% - 3px),
+          #000 calc(100% - 3px)
+        );
+      }
+      .ring-glow {
+        filter: blur(16px);
+        opacity: 0.5;
+      }
+      .logo {
+        position: absolute;
+        inset: 8px;
+        border-radius: 50%;
+        overflow: hidden;
+        display: grid;
+        place-items: center;
+        font-size: 50px;
+        font-weight: 700;
+        line-height: 1;
+        color: var(--ink);
+      }
+      .logo img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @keyframes float {
+        50% {
+          transform: translateY(-6px);
+        }
+      }
 
-h1 { margin: 12px 0 0; font-size: 30px; line-height: 1.25; font-weight: 700; text-wrap: balance; }
-.sub {
-  margin: 0; font-weight: 700; font-size: 13px; letter-spacing: .18em;
-  background: linear-gradient(90deg, var(--ring-a), var(--ring-b), var(--ring-c), var(--ring-a));
-  background-size: 250% 100%; -webkit-background-clip: text; background-clip: text;
-  color: transparent; -webkit-text-fill-color: transparent;
-  animation: slide 6s linear infinite;
-}
-@keyframes slide { to { background-position: 250% 0; } }
-.tagline { margin: 0; color: var(--muted); max-width: 30ch; text-wrap: balance; }
+      h1 {
+        margin: 12px 0 0;
+        font-size: 30px;
+        line-height: 1.25;
+        font-weight: 700;
+        text-wrap: balance;
+      }
+      .sub {
+        margin: 0;
+        font-weight: 700;
+        font-size: 13px;
+        letter-spacing: 0.18em;
+        background: linear-gradient(
+          90deg,
+          var(--ring-a),
+          var(--ring-b),
+          var(--ring-c),
+          var(--ring-a)
+        );
+        background-size: 250% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        -webkit-text-fill-color: transparent;
+        animation: slide 6s linear infinite;
+      }
+      @keyframes slide {
+        to {
+          background-position: 250% 0;
+        }
+      }
+      .tagline {
+        margin: 0;
+        color: var(--muted);
+        max-width: 30ch;
+        text-wrap: balance;
+      }
 
-/* links */
-nav { display: flex; flex-direction: column; gap: 12px; }
-.link {
-  --mx: 50%; --my: 50%;
-  position: relative; overflow: hidden; isolation: isolate;
-  display: flex; align-items: center; gap: 14px; min-width: 0;
-  padding: 14px 16px; border-radius: 22px; text-decoration: none; color: var(--ink);
-  transition: transform .25s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease;
-}
-.link::before {
-  content: ""; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity .25s ease;
-  background: radial-gradient(190px circle at var(--mx) var(--my), var(--spot), transparent 70%);
-}
-.link::after {
-  content: ""; position: absolute; top: 0; bottom: 0; left: 0; width: 45%; z-index: -1;
-  background: linear-gradient(100deg, transparent, rgba(255,255,255,.95), transparent);
-  transform: translateX(-130%) skewX(-18deg);
-}
-.link:hover, .link:focus-visible { transform: translateY(-3px) scale(1.015); box-shadow: inset 0 1px 0 #fff, 0 22px 44px -16px var(--shadow); }
-.link:hover::before, .link:focus-visible::before { opacity: 1; }
-.link:hover::after, .link:focus-visible::after { transform: translateX(330%) skewX(-18deg); transition: transform .9s ease; }
-.link:active { transform: scale(.985); }
-.link:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
-.ico {
-  flex: none; width: 46px; height: 46px; border-radius: 15px;
-  display: grid; place-items: center; color: var(--accent);
-  background: rgba(255,255,255,.7); border: 1px solid #fff;
-  box-shadow: 0 6px 14px -6px var(--shadow);
-  transition: transform .3s cubic-bezier(.2,.8,.2,1);
-}
-.link:hover .ico { transform: rotate(-8deg) scale(1.08); }
-.ico svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
-.txt { min-width: 0; display: flex; flex-direction: column; }
-.txt b { font-weight: 600; }
-.txt small { font-size: 13px; color: var(--muted); overflow-wrap: anywhere; }
-.arrow { margin-left: auto; flex: none; width: 18px; height: 18px; fill: none; stroke: var(--muted); stroke-width: 2; transition: transform .25s ease, stroke .25s ease; }
-.link:hover .arrow { transform: translateX(4px); stroke: var(--ink); }
-footer { text-align: center; color: var(--muted); font-size: 13px; }
+      /* links */
+      nav {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .link {
+        --mx: 50%;
+        --my: 50%;
+        position: relative;
+        overflow: hidden;
+        isolation: isolate;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        min-width: 0;
+        padding: 14px 16px;
+        border-radius: 22px;
+        text-decoration: none;
+        color: var(--ink);
+        transition:
+          transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1),
+          box-shadow 0.25s ease;
+      }
+      .link::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+        background: radial-gradient(
+          190px circle at var(--mx) var(--my),
+          var(--spot),
+          transparent 70%
+        );
+      }
+      .link::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: 45%;
+        z-index: -1;
+        background: linear-gradient(
+          100deg,
+          transparent,
+          rgba(255, 255, 255, 0.95),
+          transparent
+        );
+        transform: translateX(-130%) skewX(-18deg);
+      }
+      .link:hover,
+      .link:focus-visible {
+        transform: translateY(-3px) scale(1.015);
+        box-shadow:
+          inset 0 1px 0 #fff,
+          0 22px 44px -16px var(--shadow);
+      }
+      .link:hover::before,
+      .link:focus-visible::before {
+        opacity: 1;
+      }
+      .link:hover::after,
+      .link:focus-visible::after {
+        transform: translateX(330%) skewX(-18deg);
+        transition: transform 0.9s ease;
+      }
+      .link:active {
+        transform: scale(0.985);
+      }
+      .link:focus-visible {
+        outline: 3px solid var(--accent);
+        outline-offset: 3px;
+      }
+      .ico {
+        flex: none;
+        width: 46px;
+        height: 46px;
+        border-radius: 15px;
+        display: grid;
+        place-items: center;
+        color: var(--accent);
+        background: rgba(255, 255, 255, 0.7);
+        border: 1px solid #fff;
+        box-shadow: 0 6px 14px -6px var(--shadow);
+        transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      .link:hover .ico {
+        transform: rotate(-8deg) scale(1.08);
+      }
+      .ico svg {
+        width: 22px;
+        height: 22px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .txt {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+      }
+      .txt b {
+        font-weight: 600;
+      }
+      .txt small {
+        font-size: 13px;
+        color: var(--muted);
+        overflow-wrap: anywhere;
+      }
+      .arrow {
+        margin-left: auto;
+        flex: none;
+        width: 18px;
+        height: 18px;
+        fill: none;
+        stroke: var(--muted);
+        stroke-width: 2;
+        transition:
+          transform 0.25s ease,
+          stroke 0.25s ease;
+      }
+      .link:hover .arrow {
+        transform: translateX(4px);
+        stroke: var(--ink);
+      }
+      footer {
+        text-align: center;
+        color: var(--muted);
+        font-size: 13px;
+      }
 
-/* entrance */
-@keyframes in { from { opacity: 0; transform: translateY(22px) scale(.97); } to { opacity: 1; transform: none; } }
-header, .link, footer { animation: in .7s cubic-bezier(.2,.8,.2,1) backwards; }
-.link:nth-child(1) { animation-delay: .15s; }
-.link:nth-child(2) { animation-delay: .25s; }
-.link:nth-child(3) { animation-delay: .35s; }
-.link:nth-child(4) { animation-delay: .45s; }
-.link:nth-child(5) { animation-delay: .55s; }
-footer { animation-delay: .7s; }
+      /* entrance */
+      @keyframes in {
+        from {
+          opacity: 0;
+          transform: translateY(22px) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      header,
+      .link,
+      footer {
+        animation: in 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+      }
+      .link:nth-child(1) {
+        animation-delay: 0.15s;
+      }
+      .link:nth-child(2) {
+        animation-delay: 0.25s;
+      }
+      .link:nth-child(3) {
+        animation-delay: 0.35s;
+      }
+      .link:nth-child(4) {
+        animation-delay: 0.45s;
+      }
+      .link:nth-child(5) {
+        animation-delay: 0.55s;
+      }
+      footer {
+        animation-delay: 0.7s;
+      }
 
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation: none !important; transition: none !important; }
-  .bubble { bottom: auto; top: calc(20% + var(--s)); }
-}
-</style>
+      @media (prefers-reduced-motion: reduce) {
+        *,
+        *::before,
+        *::after {
+          animation: none !important;
+          transition: none !important;
+        }
+        .bubble {
+          bottom: auto;
+          top: calc(20% + var(--s));
+        }
+      }
+    </style>
 
-<div class="bg" aria-hidden="true">
-  <i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i><i class="orb o4"></i>
-  <i class="bubble" style="--x:8%;  --s:46px; --t:19s; --d:-4s"></i>
-  <i class="bubble" style="--x:22%; --s:90px; --t:27s; --d:-14s"></i>
-  <i class="bubble" style="--x:38%; --s:30px; --t:16s; --d:-9s"></i>
-  <i class="bubble" style="--x:52%; --s:70px; --t:24s; --d:-1s"></i>
-  <i class="bubble" style="--x:66%; --s:40px; --t:18s; --d:-12s"></i>
-  <i class="bubble" style="--x:80%; --s:100px; --t:30s; --d:-20s"></i>
-  <i class="bubble" style="--x:92%; --s:34px; --t:17s; --d:-6s"></i>
-</div>
-
-<main>
-  <header>
-    <div class="logo-wrap" aria-hidden="true">
-      <div class="ring-glow"></div>
-      <div class="ring"></div>
-      <div class="logo glass"><img src="logo.png" alt="បងប្អូន Store logo" width="512" height="512"></div>
+    <div class="bg" aria-hidden="true">
+      <i class="orb o1"></i><i class="orb o2"></i><i class="orb o3"></i
+      ><i class="orb o4"></i>
+      <i class="bubble" style="--x: 8%; --s: 46px; --t: 19s; --d: -4s"></i>
+      <i class="bubble" style="--x: 22%; --s: 90px; --t: 27s; --d: -14s"></i>
+      <i class="bubble" style="--x: 38%; --s: 30px; --t: 16s; --d: -9s"></i>
+      <i class="bubble" style="--x: 52%; --s: 70px; --t: 24s; --d: -1s"></i>
+      <i class="bubble" style="--x: 66%; --s: 40px; --t: 18s; --d: -12s"></i>
+      <i class="bubble" style="--x: 80%; --s: 100px; --t: 30s; --d: -20s"></i>
+      <i class="bubble" style="--x: 92%; --s: 34px; --t: 17s; --d: -6s"></i>
     </div>
-    <h1>បងប្អូន Store</h1>
-    <p class="sub">THE SIBLING PHONE STORE</p>
-    <p class="tagline">ហាងលក់ទូរស័ព្ទ · ជ្រើសរើសតំណខាងក្រោម</p>
-  </header>
 
-  <nav aria-label="Links">
-    <a class="link glass" href="https://t.me/whatissupguy" target="_blank" rel="noopener">
-      <span class="ico"><svg viewBox="0 0 24 24"><path d="M21 4 3 11l6 2 2 6 3-4 5 3 2-14Z"/></svg></span>
-      <span class="txt"><b>ឆាតតាម Telegram</b><small>@whatissupguy</small></span>
-      <svg class="arrow" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-    </a>
-    <a class="link glass" href="https://t.me/Whatisupguy" target="_blank" rel="noopener">
-      <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 10v4h3l6 4V6L7 10H4Z"/><path d="M17 9a4 4 0 0 1 0 6"/></svg></span>
-      <span class="txt"><b>ឆានែល Telegram</b><small>@Whatisupguy</small></span>
-      <svg class="arrow" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-    </a>
-    <a class="link glass" href="https://web.facebook.com/thesiblingphonestore" target="_blank" rel="noopener">
-      <span class="ico"><svg viewBox="0 0 24 24"><path d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8a1 1 0 0 1 1-1Z"/></svg></span>
-      <span class="txt"><b>ទំព័រ Facebook</b><small>The Sibling Phone Store</small></span>
-      <svg class="arrow" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-    </a>
-    <a class="link glass" href="https://www.tiktok.com/@jukbek4010?_r=1&amp;_t=ZS-98hr4skMNmf" target="_blank" rel="noopener">
-      <span class="ico"><svg viewBox="0 0 24 24"><path d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5"/><path d="M14 4c.4 2.4 2 4 4.5 4.2"/></svg></span>
-      <span class="txt"><b>TikTok</b><small>@jukbek4010</small></span>
-      <svg class="arrow" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-    </a>
-    <a class="link glass" href="https://www.google.com/maps/@11.46099,104.5214467,3a,75y,91.22h,93.72t/data=!3m7!1e1!3m5!1sljs8tGd2QZBWldPNTaU6cw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-3.7154583991323733%26panoid%3Dljs8tGd2QZBWldPNTaU6cw%26yaw%3D91.22463598241286!7i13312!8i6656?entry=tts&amp;g_ep=EgoyMDI2MDgwNS4xIPu8ASoASAFQAw%3D%3D&amp;skid=f139851b-f9b6-4597-94f5-92894c110991" target="_blank" rel="noopener">
-      <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg></span>
-      <span class="txt"><b>ទីតាំងហាង</b><small>Find us on Google Maps</small></span>
-      <svg class="arrow" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7"/></svg>
-    </a>
-  </nav>
+    <main>
+      <header>
+        <div class="logo-wrap" aria-hidden="true">
+          <div class="ring-glow"></div>
+          <div class="ring"></div>
+          <div class="logo glass">
+            <img
+              src="logo.png"
+              alt="បងប្អូន Store logo"
+              width="512"
+              height="512"
+            />
+          </div>
+        </div>
+        <h1>បងប្អូន Store</h1>
+        <p class="sub">THE SIBLING PHONE STORE</p>
+        <p class="tagline">ហាងលក់ទូរស័ព្ទ · ជ្រើសរើសតំណខាងក្រោម</p>
+      </header>
 
-  <footer>© បងប្អូន Store</footer>
-</main>
+      <nav aria-label="Links">
+        <a
+          class="link glass"
+          href="https://t.me/wegotsth4U"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="ico"
+            ><svg viewBox="0 0 24 24">
+              <path d="M21 4 3 11l6 2 2 6 3-4 5 3 2-14Z" /></svg
+          ></span>
+          <span class="txt"
+            ><b>ឆាតតាម Telegram</b><small>@wegotsth4U</small></span
+          >
+          <svg class="arrow" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg>
+        </a>
+        <a
+          class="link glass"
+          href="https://t.me/Whatisupguy"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="ico"
+            ><svg viewBox="0 0 24 24">
+              <path d="M4 10v4h3l6 4V6L7 10H4Z" />
+              <path d="M17 9a4 4 0 0 1 0 6" /></svg
+          ></span>
+          <span class="txt"
+            ><b>ឆានែល Telegram</b><small>@Whatisupguy</small></span
+          >
+          <svg class="arrow" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg>
+        </a>
+        <a
+          class="link glass"
+          href="https://web.facebook.com/thesiblingphonestore"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="ico"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M14 8h3V4h-3a4 4 0 0 0-4 4v3H7v4h3v6h4v-6h3l1-4h-4V8a1 1 0 0 1 1-1Z"
+              /></svg
+          ></span>
+          <span class="txt"
+            ><b>ទំព័រ Facebook</b><small>The Sibling Phone Store</small></span
+          >
+          <svg class="arrow" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg>
+        </a>
+        <a
+          class="link glass"
+          href="https://www.tiktok.com/@wegotsmth4u?_r=1&_t=ZS-9BgMeuPJLBU"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="ico"
+            ><svg viewBox="0 0 24 24">
+              <path d="M14 4v10.5a3.5 3.5 0 1 1-3.5-3.5" />
+              <path d="M14 4c.4 2.4 2 4 4.5 4.2" /></svg
+          ></span>
+          <span class="txt"><b>TikTok</b><small>@បងប្អូន Store</small></span>
+          <svg class="arrow" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg>
+        </a>
+        <a
+          class="link glass"
+          href="https://www.google.com/maps/@11.46099,104.5214467,3a,75y,91.22h,93.72t/data=!3m7!1e1!3m5!1sljs8tGd2QZBWldPNTaU6cw!2e0!6shttps:%2F%2Fstreetviewpixels-pa.googleapis.com%2Fv1%2Fthumbnail%3Fcb_client%3Dmaps_sv.tactile%26w%3D900%26h%3D600%26pitch%3D-3.7154583991323733%26panoid%3Dljs8tGd2QZBWldPNTaU6cw%26yaw%3D91.22463598241286!7i13312!8i6656?entry=tts&amp;g_ep=EgoyMDI2MDgwNS4xIPu8ASoASAFQAw%3D%3D&amp;skid=f139851b-f9b6-4597-94f5-92894c110991"
+          target="_blank"
+          rel="noopener"
+        >
+          <span class="ico"
+            ><svg viewBox="0 0 24 24">
+              <path
+                d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"
+              />
+              <circle cx="12" cy="9.5" r="2.5" /></svg
+          ></span>
+          <span class="txt"
+            ><b>ទីតាំងហាង</b><small>Find us on Google Maps</small></span
+          >
+          <svg class="arrow" viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg>
+        </a>
+      </nav>
 
-<script>
-document.querySelectorAll('.link').forEach(function (el) {
-  el.addEventListener('pointermove', function (e) {
-    var r = el.getBoundingClientRect();
-    el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-    el.style.setProperty('--my', (e.clientY - r.top) + 'px');
-  });
-});
-</script>
+      <footer>© បងប្អូន Store</footer>
+    </main>
 
-</body></html>
+    <script>
+      document.querySelectorAll('.link').forEach(function (el) {
+        el.addEventListener('pointermove', function (e) {
+          var r = el.getBoundingClientRect();
+          el.style.setProperty('--mx', e.clientX - r.left + 'px');
+          el.style.setProperty('--my', e.clientY - r.top + 'px');
+        });
+      });
+    </script>
+  </body>
+</html>
